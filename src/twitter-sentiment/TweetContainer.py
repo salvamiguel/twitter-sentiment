@@ -1,3 +1,4 @@
+from pysentimiento.preprocessing import preprocess_tweet
 from datetime import datetime
 from typing import Tuple
 from tweepy import Tweet
@@ -29,14 +30,7 @@ class TweetContainer:
         return regrex_pattern.sub(r'',text)
 
     def filtered_text(self):
-        txt = self.remove_emoji(self.tweet.text)
-        
-        if(isinstance(txt, str)):
-            escape = ["@", "http", "#", "RT", "|", "."]
-            tokenization = txt.split(" ")
-            new_txt = filter(lambda w: not any([w.startswith(es) for es in escape]),tokenization)
-            return " ".join(new_txt)
-        return False
+        return preprocess_tweet(self.tweet.text)
     
     def get_row(self) -> Tuple[int, str, datetime, str, str]:
         return (

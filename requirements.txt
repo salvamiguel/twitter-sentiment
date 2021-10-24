@@ -1,0 +1,4 @@
+openpyxl==3.0.9
+tweepy==4.1.0
+pysentimiento==0.2.5
+tqdm

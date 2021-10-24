@@ -8,7 +8,7 @@ class TweetExtractor:
 
     def __init__(self, bearer_token: str, file_path: str) -> None:
         self.file_path = file_path
-        self.twitter_client = Client(bearer_token=bearer_token)
+        self.twitter_client = Client(bearer_token=bearer_token, wait_on_rate_limit=True)
         self.workbook = None
 
     def open_file(self) -> openpyxl.Workbook:
@@ -23,7 +23,7 @@ class TweetExtractor:
         else:
             sheet = self.workbook[self.workbook.sheetnames[0]]
         
-        for row in sheet.iter_rows(min_row=2, max_row=2):
+        for row in sheet.iter_rows(min_row=2):
             queries.append(TweetQuery
             (row[0].value, row[1].value, row[2].value, row[3].value))
         
@@ -40,8 +40,6 @@ class TweetExtractor:
         return queries_result
 
 
-t = TweetExtractor('AAAAAAAAAAAAAAAAAAAAAFV5UwEAAAAA97TibistsvE7HBSwwfCF97DMz%2FI%3DycD3aENBtw5YtaOoBxzM1h9lQJ4QgbJIOz9Fcj2TRIzIWNB95F', "./input.xlsx")
-t.pull_queries(t.get_queries())
 
 
 

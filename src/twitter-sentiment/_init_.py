@@ -1,7 +1,6 @@
 from TweetExtractor import TweetExtractor
-from TweetSentimentAnalizer import TweetSentimentAnalizer
+from TweetSentimentAnalyzer import TweetSentimentAnalyzer
 
-extractor = TweetExtractor('', "./input.xlsx")
-analizer = TweetSentimentAnalizer()
+analizer = TweetSentimentAnalyzer()
 tweets = extractor.pull_queries(extractor.get_queries())
 analizer.from_list(extractor.workbook, tweets)
